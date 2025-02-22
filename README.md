@@ -6,7 +6,7 @@ https://tool.openai2025.com/
 
 # 网站效果：
 
-效果(https://tool.openai2025.com/images/61.png)
+![图片描述](images/61.png)
 
 #### 功能
 
