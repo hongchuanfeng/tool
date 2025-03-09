@@ -7,114 +7,7 @@
     <meta name="keywords" content="在线免费软件工具箱">
     <meta name="description" content="一款在线免费软件工具箱，无需登录，无需费用，用完就走的软件工具。包有BMI计算、倒计时、单位转换、密码生成器、摩斯电码、代码编辑器、计算器、快递查询、二维码生成、网速测速，还包过有轻松小游戏，有扫雷、猜拳、数字华容道、走迷宫、猜数字、文字游戏等。">
     <link rel="canonical" href="https://tool.openai2025.com/">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-image: url(images/bg.jpg);
-            background-size: contain;
-            /* 背景图片大小设置为自适应 */
-            background-position: center center;
-        }
-
-        .container {
-            max-width: 100%;
-            margin: 0;
-            padding: 20px;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        .toolbox {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            grid-gap: 20px;
-            justify-items: center;
-            margin-top: 20px;
-        }
-
-        .toolbox__item {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #f2f2f2;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease;
-            cursor: pointer;
-        }
-
-        /* 适用于手机屏幕 */
-        @media (max-width: 600px) {
-            .toolbox__item {
-                width: 100%;
-                height: auto;
-            }
-
-            .toolbox__item-icon {
-                font-size: 10vw; /* 修改为更合适的图标大小 */
-            }
-        }
-
-        .toolbox__item:hover {
-            background-color: #e2e2e2;
-        }
-
-        .toolbox__item a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .toolbox__item-icon {
-            font-size: 48px; /* 修改为更合适的图标大小 */
-            margin-bottom: 10px;
-        }
-
-        .toolbox__item-title {
-            text-align: center;
-        }
-
-        .settings {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .settings__button {
-            padding: 5px 10px;
-            background-color: #f2f2f2;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-        }
-
-        .settings__button:hover {
-            background-color: #e2e2e2;
-        }
-
-        .contact {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .contact__email {
-            font-weight: bold;
-            color: blue;
-        }
-
-        .website {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .website__link {
-            color: blue;
-        }
-    </style>
+    <link rel="stylesheet" href="scss/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SQLH42B270"></script>
@@ -125,6 +18,7 @@
 
         gtag('config', 'G-SQLH42B270');
     </script>
+
 </head>
 <body>
 <div class="container">
@@ -185,7 +79,7 @@
         <div class="toolbox__item">
             <a href="ip.html">
                 <div class="toolbox__item-icon"><i class="fa fa-cloud"></i></div>
-                <div class="toolbox__item-title">ip查询</div>
+                <div class="toolbox__item-title">IP查询</div>
             </a>
         </div>
 
@@ -196,12 +90,6 @@
             </a>
         </div>
 
-<!--        <div class="toolbox__item">-->
-<!--            <a href="https://member.bilibili.com/york/videoup?platform=PWA&source=launcher">-->
-<!--                <div class="toolbox__item-icon"><i class="fa fa-upload"></i></div>-->
-<!--                <div class="toolbox__item-title">B站清新一键投稿</div>-->
-<!--            </a>-->
-<!--        </div>-->
         <div class="toolbox__item">
             <a href="yy.html">
                 <div class="toolbox__item-icon"><i class="fas fa-volume-up"></i></div>
@@ -244,34 +132,12 @@
             </a>
         </div>
 
-
-<!--        <div class="toolbox__item">-->
-<!--            <a href="tx.html">-->
-<!--                <div class="toolbox__item-icon"><i class="fas fa-user-circle"></i></div>-->
-<!--                <div class="toolbox__item-title">QQ头像获取工具</div>-->
-<!--            </a>-->
-<!--        </div>-->
-
         <div class="toolbox__item">
             <a href="cjfx.html">
                 <div class="toolbox__item-icon"><i class="fas fa-chart-bar"></i></div>
                 <div class="toolbox__item-title">成绩分析</div>
             </a>
         </div>
-
-<!--        <div class="toolbox__item">-->
-<!--            <a href="pdf.html">-->
-<!--                <div class="toolbox__item-icon"><i class="fas fa-file-pdf"></i></div>-->
-<!--                <div class="toolbox__item-title">HTML转PDF</div>-->
-<!--            </a>-->
-<!--        </div>-->
-
-<!--        <div class="toolbox__item">-->
-<!--            <a href="ty/index.html">-->
-<!--                <div class="toolbox__item-icon"><i class="fas fa-paint-brush"></i></div>-->
-<!--                <div class="toolbox__item-title">灵魂涂鸦</div>-->
-<!--            </a>-->
-<!--        </div>-->
 
         <div class="toolbox__item">
             <a href="xj.html">
@@ -280,26 +146,12 @@
             </a>
         </div>
 
-<!--        <div class="toolbox__item">-->
-<!--            <a href="fx.html">-->
-<!--                <div class="toolbox__item-icon"><i class="fas fa-edit"></i></div>-->
-<!--                <div class="toolbox__item-title">冷静草稿框</div>-->
-<!--            </a>-->
-<!--        </div>-->
-
         <div class="toolbox__item">
             <a href="qr.html">
                 <div class="toolbox__item-icon"><i class="fas fa-qrcode"></i></div>
                 <div class="toolbox__item-title">二维码生成</div>
             </a>
         </div>
-
-<!--        <div class="toolbox__item">-->
-<!--            <a href="pm.html">-->
-<!--                <div class="toolbox__item-icon"><i class="fas fa-desktop"></i></div>-->
-<!--                <div class="toolbox__item-title">屏幕测试</div>-->
-<!--            </a>-->
-<!--        </div>-->
 
         <div class="toolbox__item">
             <a href="kd.html">
@@ -308,14 +160,96 @@
             </a>
         </div>
 
+
+    </div>
+
+    <h1>在线图片处理工具</h1>
+
+    <div class="toolbox">
         <div class="toolbox__item">
-            <a href="cdn.html">
-                <div class="toolbox__item-icon"><i class="fa fa-cube"></i></div>
-                <div class="toolbox__item-title">图标库CDN服务</div>
+            <a href="https://mosaic.openai2025.com/" target="_blank">
+                <div class="toolbox__item-icon">
+                    <img src="images/msk.png" height="48" width="48"/>
+                </div>
+                <div class="toolbox__item-title">图片马赛克工具</div>
+            </a>
+        </div>
+        <div class="toolbox__item">
+            <a href="https://watermark.openai2025.com/" target="_blank">
+                <div class="toolbox__item-icon">
+                    <img src="images/sy.png" height="48" width="48"/>
+                </div>
+                <div class="toolbox__item-title">图片水印工具</div>
+            </a>
+        </div>
+        <div class="toolbox__item">
+            <a href="https://compress.openai2025.com/" target="_blank">
+                <div class="toolbox__item-icon">
+                    <img src="images/ys.png" height="48" width="48"/>
+                </div>
+                <div class="toolbox__item-title">图片压缩工具</div>
+            </a>
+        </div>
+        <div class="toolbox__item">
+            <a href="https://icon.openai2025.com/" target="_blank">
+                <div class="toolbox__item-icon">
+                    <img src="images/icon.png" height="48" width="48"/>
+                </div>
+                <div class="toolbox__item-title">图片转为ICON工具</div>
+            </a>
+        </div>
+
+        <div class="toolbox__item">
+            <a href="https://getcolor.openai2025.com/" target="_blank">
+                <div class="toolbox__item-icon" style="text-align: center">
+
+
+                    <img src="images/pk.png" height="48" width="48"/>
+                </div>
+                <div class="toolbox__item-title">图片拾取颜色工具</div>
+            </a>
+        </div>
+
+        <div class="toolbox__item">
+            <a href="https://img2excel.openai2025.com/" target="_blank">
+                <div class="toolbox__item-icon">
+                    <img src="images/excel.png" height="48" width="48"/>
+                </div>
+                <div class="toolbox__item-title">图片转Excel工具</div>
+            </a>
+        </div>
+    </div>
+
+    <h1>在线开发工具</h1>
+    <div class="toolbox">
+        <div class="toolbox__item">
+            <a href="https://base64.openai2025.com/" target="_blank">
+                <div class="toolbox__item-icon">
+                    <img src="images/base64.png" height="48" width="48"/>
+                </div>
+                <div class="toolbox__item-title">Base64转换</div>
+            </a>
+        </div>
+        <div class="toolbox__item">
+            <a href="https://json.openai2025.com/" target="_blank">
+                <div class="toolbox__item-icon">
+                    <img src="images/json.png" height="48" width="48"/>
+                </div>
+                <div class="toolbox__item-title">在线JSON工具</div>
+            </a>
+        </div>
+        <div class="toolbox__item">
+            <a href="https://reg.openai2025.com/" target="_blank">
+                <div class="toolbox__item-icon">
+                    <img src="images/reg.png" height="48" width="48"/>
+                </div>
+                <div class="toolbox__item-title">正则表达式测试工具</div>
             </a>
         </div>
 
     </div>
+
+
     <h1>游戏</h1>
     <div class="toolbox">
         <div class="toolbox__item">
