@@ -1,0 +1,329 @@
+:root {
+    --ph-orange: #ff9000;
+    --ph-black: #ffffff;
+    --ph-dark-gray: #ffffff;
+    --ph-text: #000000;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    /*display: flex;*/
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    background: var(--ph-black);
+    color: var(--ph-text);
+}
+
+.logo-text {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    background: var(--ph-black);
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.logo-text span:first-child {
+    color: var(--ph-text);
+    background: var(--ph-black);
+    padding: 3px 8px;
+    border-radius: 3px;
+}
+
+.logo-text span:last-child {
+    color: var(--ph-black);
+    background: var(--ph-orange);
+    padding: 3px 8px;
+    border-radius: 3px;
+}
+
+.container {
+    text-align: center;
+    padding: 30px;
+    border: 2px solid var(--ph-orange);
+    border-radius: 8px;
+    background: var(--ph-dark-gray);
+    box-shadow: 0 4px 15px rgba(255, 144, 0, 0.2);
+    max-width: 800px;
+    width: 90%;
+}
+
+.settings {
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(255, 144, 0, 0.1);
+    border: 1px solid var(--ph-orange);
+    border-radius: 5px;
+    text-align: left;
+}
+
+.settings label {
+    display: block;
+    margin: 15px 0;
+    font-size: 1.1em;
+}
+
+input[type="range"] {
+    width: 100%;
+    height: 8px;
+    background: var(--ph-dark-gray);
+    border-radius: 4px;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--ph-orange);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+select {
+    padding: 8px;
+    background: var(--ph-dark-gray);
+    color: var(--ph-text);
+    border: 1px solid var(--ph-orange);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="file"] {
+    margin: 20px 0;
+    padding: 10px;
+    background: var(--ph-dark-gray);
+    border: 1px solid var(--ph-orange);
+    border-radius: 4px;
+    color: var(--ph-text);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    margin: 20px 0;
+    padding: 12px 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--ph-black);
+    background: var(--ph-orange);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #ffa533;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 144, 0, 0.4);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background: var(--ph-dark-gray);
+    border: 1px solid var(--ph-orange);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 15px 0;
+    display: none;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background: var(--ph-orange);
+    transition: width 0.3s ease;
+}
+
+.file-info {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(255, 144, 0, 0.1);
+    border: 1px solid var(--ph-orange);
+    border-radius: 5px;
+    display: none;
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+#download {
+    display: inline-block;
+    margin: 20px 0;
+    padding: 12px 30px;
+    color: var(--ph-black);
+    background: var(--ph-orange);
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+#download:hover {
+    background: #ffa533;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 144, 0, 0.4);
+}
+
+#preview img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 20px;
+    border: 2px solid var(--ph-orange);
+}
+
+/* 移动设备适配 */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .logo-text {
+        font-size: 2em;
+    }
+
+    .settings {
+        padding: 15px 10px;
+    }
+
+    .settings label {
+        font-size: 1em;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        font-size: 1.1em;
+    }
+
+    input[type="file"] {
+        padding: 8px;
+    }
+
+    #download {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    .file-info {
+        font-size: 0.9em;
+        padding: 10px;
+    }
+}
+
+/* 超小屏幕设备适配 */
+@media screen and (max-width: 480px) {
+    .logo-text {
+        font-size: 1.8em;
+    }
+
+    .settings label {
+        margin: 10px 0;
+    }
+
+    .container {
+        padding: 10px;
+    }
+}
+
+/* 确保所有可点击元素有足够的点击区域 */
+@media (hover: none) and (pointer: coarse) {
+    button,
+    select,
+    input[type="file"],
+    #download {
+        min-height: 44px;
+    }
+}
+
+.upload-area {
+    position: relative;
+    width: 100%;
+    min-height: 200px;
+    border: 2px dashed var(--ph-orange);
+    border-radius: 8px;
+    background: rgba(255, 144, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.upload-area.drag-over {
+    background: rgba(255, 144, 0, 0.1);
+    border-style: solid;
+}
+
+.upload-area i {
+    font-size: 3em;
+    color: var(--ph-orange);
+    margin-bottom: 10px;
+}
+
+.upload-text {
+    color: var(--ph-text);
+    margin: 10px 0;
+}
+
+.upload-hint {
+    font-size: 0.9em;
+    color: #888;
+    margin-top: 5px;
+}
+
+.recommended-tag {
+    background: var(--ph-orange);
+    color: var(--ph-black);
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    margin-left: 8px;
+}
+
+.error-message {
+    color: #ff4444;
+    margin: 10px 0;
+    display: none;
+}
+
+.upload-area input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.upload-content {
+    position: relative;
+    z-index: 0;
+    pointer-events: none;
+}
+.h-left{
+    margin: auto;
+    max-width: 500px;
+    text-align: center;
+}
+.h-right a{
+    line-height: 80px;
+    color:white;
+    text-decoration: underline;
+    margin-left: 8px;
+}

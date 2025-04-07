@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="RegexBuddy">
+    <meta name="renderer" content="webkit">
+    <title>
+        RegexBuddy-在线正则表达式测试工具
+    </title>
+    <link rel="icon" href="../favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+	<link rel="canonical" href="https://tool.openai2025.com/">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SQLH42B270"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-SQLH42B270');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7274710287377352"
+            crossorigin="anonymous"></script>
+
+    <script src="lib/jquery-1.9.1.js"></script>
+    
+    <link rel="stylesheet" href="lib/codemirror/codemirror.css">
+    <script src="lib/codemirror/codemirror.js"></script>
+
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
+    <script src="lib/bootstrap/js/bootstrap.js"></script>
+    <script src="js/jch.Core.js"></script>
+    <script src="js/jch.jRegexTester.js"></script>
+    <script src="js/index.js"></script>
+    <link href="css.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container-fluid">
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="btn-toolbar alert alert-info" role="toolbar">
+                        <h1 class="title">
+                            正则测试工具
+                        </h1>
+
+
+
+                        <div class="btn-group btn-group-sm" data-toggle="buttons" role="group">
+
+                            <label class="btn btn-default active">
+                                <input type="radio" name="workMode" id="workModeMatch" value="0" checked>查找模式
+
+                            </label>
+                            <label class="btn btn-default">
+                                <input type="radio" name="workMode" id="workModeReplace" value="1">替换模式
+
+
+                            </label>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-success navbar-btn" id="btnRun" style="display:none">运行!</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="btn-toolbar alert alert-warning" role="toolbar">
+   
+                        <label for=''>正则表达式 :</label>
+                        <div class="btn-group btn-group-xs" data-toggle="buttons" role="group">
+                            <a href='javascript:;' class="copy-link" id="copyLink" title="复制当前正则表达式与替换字符串到URL">
+                                #复制链接
+                            </a>
+                            <label class="btn btn-default active" title="选中为匹配所有符合项，否则只匹配第一项，参数g">
+                                <input type="checkbox" name="RegExpOption" id="RegExpOptionGlobal" value="g" checked>全局模式
+                            </label>
+                            <label class="btn btn-default" title="选中则忽略大小写，参数i">
+                                <input type="checkbox" name="RegExpOption" id="RegExpOptionIgnoreCase" value="i">忽略大小写
+                            </label>
+                            <label class="btn btn-default" title="选中则转义^和$为行的开始和结束，否则^和$为所有文本的开始和结束">
+                                <input type="checkbox" name="RegExpOption" id="RegExpOptionMultiline" value="m">多行模式
+                            </label>
+                        </div>
+                        <textarea class="form-control" style="font-size:x-large" name="" id="tbReg" cols="30" rows="1" placeholder="正则表达式" spellcheck="false"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="btn-toolbar alert alert-warning" role="toolbar">
+                        <label for=''>输入字符串 : </label>
+                        <div class="btn-group btn-group-xs" role="group">
+                            <label class="btn btn-default" title="将输入字符串调用decodeURIComponent解码" id="btnDecodeURI">decodeURI</label>
+                            <label class="btn btn-default" title="将输入字符串当做base64进行解码" id="btnDecodeBase64">Base64解码</label>
+                        </div>
+                        <textarea class="form-control" name="" id="tbInput" cols="30" rows="7" placeholder="输入字符串" spellcheck="false"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="btn-toolbar alert alert-warning" role="toolbar">
+                        <label for="">替换内容 : </label>
+                        <div class="btn-group btn-group-xs" data-toggle="buttons" role="group">
+                            <label class="btn btn-default active" title="默认模式，指将源字符串中的匹配结果替换为新内容">
+                                <input type="radio" name="replaceMode" id="replaceModeIncludeNoMatch" value="0" checked>包含不匹配的项目
+                            </label>
+                            <label class="btn btn-default" title="提取模式，用于将源字符串中匹配内容替换后新内容，常用于数据提取">
+                                <input type="radio" name="replaceMode" id="replaceModeExcludeNoMatch" value="1">排除不匹配的项目
+                            </label>
+                        </div>
+                        <textarea class="form-control" name="" id="tbReplace" cols="30" rows="3" placeholder="替换内容" spellcheck="false"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="btn-toolbar alert alert-warning" role="toolbar">
+                        <label for=''>输出结果:</label>
+
+                        <div class="btn-group btn-group-xs" role="group">
+                            <label class="btn btn-default" title="将输出结果导入输入内容框" id="btnOutputToInput">⬆</label>
+                        </div>
+
+                        <div class="btn-group btn-group-xs" data-toggle="buttons" role="group">
+                            <label class="btn btn-default active" title="window系统换行符,CRLF">
+                                <input type="radio" name="newLineChar" id="newLineCharCRLF" value="0" checked>\r\n
+                            </label>
+                            <label class="btn btn-default" title="Mac系统换行符,CR">
+                                <input type="radio" name="newLineChar" id="newLineCharCR" value="1">\r
+                            </label>
+                            <label class="btn btn-default" title="Linux系统换行符,LF">
+                                <input type="radio" name="newLineChar" id="newLineCharLF" value="2">\n
+                            </label>
+                        </div>
+                        <textarea class="form-control" name="" id="tbOutput" cols="30" rows="7" placeholder="输出结果" spellcheck="false"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <center>(<a href="./index.html">简体中文</a> | <a href="./index-en.html">English</a>)</center>
+
+</body>
+
+</html>

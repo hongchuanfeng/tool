@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> 在线JSON格式化工具</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/css.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/clipboard.min.js"></script>
+    <link rel="stylesheet" href="css/jquery.json-viewer.min.css" />
+    <link rel="canonical" href="https://tool.openai2025.com/">
+    <script src="js/jquery.json-viewer.min.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SQLH42B270"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-SQLH42B270');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7274710287377352"
+            crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
+</head>
+
+<body>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12">
+            <h1 class="h-left">在线JSON工具</h1>
+        </div>
+    </div>
+
+    <div class="container" style="padding-top:20px;padding-bottom:20px;">
+
+        <div class="form-group mb-3">
+            <textarea class="form-control" rows="10" id="output" placeholder="请输入JSON字符串"></textarea>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+                <button class="btn btn-success btn-block" id="gsh">
+                    格式化
+                </button>
+            </div>
+            <div class="col">
+                <button class="btn btn-info btn-block copybtn" id="copy" data-clipboard-target="#output">
+                    复制
+                </button>
+            </div>
+            <div class="col">
+                <button class="btn btn-danger btn-block" id="clean">
+                    清除
+                </button>
+            </div>
+        </div>
+        <pre id="json"></pre>
+    </div>
+    <center>(<a href="./index.html">简体中文</a> | <a href="./index-en.html">English</a>)</center>
+    <script>
+        var clipboard = new ClipboardJS('.copybtn');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+﻿.page.main {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    --input-view-height: 35px;
+}
+
+    .page.main .control-view {
+        height: var(--input-view-height);
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        justify-content: center;
+        gap: 3px;
+        padding-bottom: 5px;
+    }
+
+    .page.main .show-view {
+        position: absolute;
+        height: calc(100% - var(--input-view-height) - 5px);
+        width: 100%;
+        text-align: center;
+    }
+
+#img-input {
+    height: var(--input-view-height);
+    line-height: var(--input-view-height);
+}
+
+#pix-color {
+    height: var(--input-view-height);
+    width: var(--input-view-height);
+    line-height: var(--input-view-height);
+}
+
+#pix-rgb-hex {
+    height: var(--input-view-height);
+    width: 60px;
+    line-height: var(--input-view-height);
+}
+
+#pix-rgb-hex2 {
+    height: var(--input-view-height);
+    width: 140px;
+    line-height: var(--input-view-height);
+}
+
+#pix-rgb-hex3 {
+    height: var(--input-view-height);
+    width: 140px;
+    line-height: var(--input-view-height);
+}
+canvas {
+    position: relative;
+    margin: 0;
+}
+
+input {
+    display: block;
+    cursor: pointer;
+}
+
+.row {
+    text-align:center;
+}
+
+.h-right a {
+    margin: 10px;
+    text-decoration: underline;
+    color: #0087f5;
+    line-height:80px;
+}

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片转Excel工具 - Image to Excel tool - Image to Excel AI tool </title>
+    <link rel="icon" href="../favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+    <meta name="description" content="Image to Excel AI tool,免费在线图片转Excel工具,可将图片快速转换为Excel像素艺术,支持调整亮度、对比度、饱和度等参数,轻松创建Excel艺术作品">
+    <meta name="keywords" content="Image to Excel AI tool ,图片转Excel,像素艺术,Excel艺术,图片处理,在线工具">
+    <meta name="author" content="图片转Excel工具">
+    <meta property="og:title" content="图片转Excel工具 - 在线免费图片转Excel像素艺术">
+    <meta property="og:description" content="Image to Excel AI tool ,免费在线图片转Excel工具,可将图片快速转换为Excel像素艺术,支持调整亮度、对比度、饱和度等参数,轻松创建Excel艺术作品">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tool.openai2025.com">
+    <link rel="canonical" href="https://tool.openai2025.com/">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SQLH42B270"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-SQLH42B270');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7274710287377352"
+            crossorigin="anonymous"></script>
+    <link href="css.css" rel="stylesheet" />
+
+    <link href="bootstrap.min.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <div class="row" style="margin-right: 0px">
+        <div class="col-xs-12 col-sm-12">
+            <h1 class="h-left">
+                Image to Excel
+            </h1>
+        </div>
+
+    </div>
+    <div class="container">
+
+        <p class="text-center mb-4" style=" color: mediumvioletred;">
+            Convert your images into Excel artwork, supporting adjustments such as brightness and contrast, making it easy to create pixel style table art
+        </p>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card p-4 mb-4">
+                    <div class="upload-area text-center p-5 border rounded" id="uploadArea">
+                        <input type="file" id="fileInput" accept="image/*" class="d-none">
+                        <div>
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mb-3">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                            <p class="mb-0">
+                                Click or drag the image here
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="settings card mt-4" id="settings">
+                        <div class="card-body">
+                            <div class="settings-group mb-4">
+                                <h3 class="h5 mb-3">
+                                    Pictures
+                                </h3>
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        Maximum number of pixels:
+                                    </label>
+                                    <input type="number" id="maxSize" value="50" min="10" max="200" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        Brightness:
+                                    </label>
+                                    <div class="d-flex align-items-center">
+                                        <input type="range" id="brightness" min="-100" max="100" value="0" class="form-range flex-grow-1">
+                                        <span class="range-value ms-2">0</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        contrast ratio:
+                                    </label>
+                                    <div class="d-flex align-items-center">
+                                        <input type="range" id="contrast" min="-100" max="100" value="0" class="form-range flex-grow-1">
+                                        <span class="range-value ms-2">0</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        saturation:
+                                    </label>
+                                    <div class="d-flex align-items-center">
+                                        <input type="range" id="saturation" min="-100" max="100" value="0" class="form-range flex-grow-1">
+                                        <span class="range-value ms-2">0</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        hue:
+                                    </label>
+                                    <div class="d-flex align-items-center">
+                                        <input type="range" id="hue" min="-180" max="180" value="0" class="form-range flex-grow-1">
+                                        <span class="range-value ms-2">0</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="settings-group">
+                                <h3 class="h5 mb-3">
+                                    Excel Settings
+                                </h3>
+                                <div class="mb-3">
+                                    <label class="form-label">cell size:</label>
+                                    <input type="number" id="cellSize" value="40" min="20" max="100" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Background color of worksheet:</label>
+                                    <input type="color" id="sheetBackground" value="#FFFFFF" class="form-control form-control-color">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Cell Border:</label>
+                                    <select id="borderStyle" class="form-select">
+                                        <option value="none">no border</option>
+                                        <option value="thin">Thin edge</option>
+                                        <option value="medium">Medium border</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Border color:</label>
+                                    <input type="color" id="borderColor" value="#000000" class="form-control form-control-color">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">scaling:</label>
+                                    <select id="zoomScale" class="form-select">
+                                        <option value="50">50%</option>
+                                        <option value="75">75%</option>
+                                        <option value="100" selected>100%</option>
+                                        <option value="125">125%</option>
+                                        <option value="150">150%</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="preview-container" id="previewContainer">
+                    <img id="previewImage" class="preview-image img-fluid mb-3">
+                    <div class="pixel-preview">
+                        <div id="pixelGrid" class="pixel-grid"></div>
+                    </div>
+                    <button class="btn btn-primary w-100" id="generateButton">Generate Excel file</button>
+                    <div id="loading" class="loading text-muted mt-3">Generating Excel file, please wait.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="canvas" style="display:none;"></canvas>
+    <script src="main.js"></script>
+    <center>(<a href="./index.html">Simplified Chinese</a> | <a href="./index-en.html">English</a>)</center>
+
+</body>
+
+</html>

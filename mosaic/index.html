@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-100%, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+    <title>在线免费图片马赛克处理工具</title>
+    <link rel="canonical" href="https://tool.openai2025.com/">
+
+    <link rel="stylesheet" href="css.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SQLH42B270"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-SQLH42B270');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7274710287377352"
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div class="header-div">
+        <h1 class="header-item">马赛克工具</h1>
+
+    </div>
+
+    <div class="main-div">
+
+
+        <div class="frame-div">
+            <div class="frame-top">
+                <input type="file" id="fileBtn" accept="image/jpeg,image/gif,image/png,image/bmp,image/webp" />
+            </div>
+            <div class="frame-center">
+                <img id="img" alt="马赛克前图片" style="display:none"/>
+            </div>
+        </div>
+        <div class="frame-div">
+            <div class="frame-top">
+                <input type="range" id="rangeInput" min="1" max="10" value="5" />
+                <input type="button" id="downloadBtn" value="下载">
+            </div>
+            <div class="frame-center">
+                <img id="convertImg" alt="马赛克处理后的图片" style="display:none"/>
+            </div>
+        </div>
+    </div>
+    <center>(<a href="./index.html">简体中文</a> | <a href="./index-en.html">English</a>)</center>
+    <script type="text/javascript">
+
+        var pix = 5;
+
+        document.getElementById("fileBtn").addEventListener("change",function (e){
+            if (window.FileReader) {
+                var file = e.target.files[0];
+                let reader = new FileReader();
+                reader.onload = function (event) {
+                    var dataURL = event.target.result;
+                    var img = document.getElementById("img");
+                    img.src = dataURL;
+                    img.style.display = "block";
+                    document.getElementById("convertImg").style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert("您的浏览器不支持更改功能");
+            }
+        });
+
+        document.getElementById("img").addEventListener("load",function (e){
+            if (e.target.src) {
+                showConvertPic();
+            }
+        });
+
+
+        document.getElementById("rangeInput").addEventListener("change", function (e) {
+            if (document.getElementById("img").src) {
+                pix = parseInt(e.target.value);
+                showConvertPic();
+            }
+        });
+
+        document.getElementById("downloadBtn").addEventListener("click",function (e){
+            var convertImg = document.getElementById("convertImg");
+            if(!!convertImg.src){
+                download(convertImg.src);
+            } else {
+                alert("请先上传图片");
+            }
+        });
+
+        function showConvertPic(){
+            var img = document.getElementById("img");
+            var convertImg = document.getElementById("convertImg");
+            convertImg.src = createRevertPic(img);
+        }
+
+        function createRevertPic(img){
+            var canvas = document.createElement("canvas");
+            canvas.width = img.width;   
+            canvas.height = img.height;
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img,0,0);  
+            var c = ctx.getImageData(0, 0, img.width, img.height);
+            var height = c.height;
+            var width = c.width;
+            for(var i = 0; i < height; i+=pix){
+                for(var j = 0; j < width; j+=pix){
+                    var rAvg = 0;
+                    var gAvg = 0;
+                    var bAvg = 0;
+                    var aAvg = 0;
+                    var count = 0;
+                    outerFor:for (var iPix = i; iPix < i+pix; iPix++) {
+                        for (var jPix = j; jPix < j+pix; jPix++) {
+                            if (iPix > height) {
+                                break;
+                            } else if(jPix>width){
+                                break outerFor;
+                            }
+                            var x = iPix*4*width + 4*jPix;
+                            count++;
+                            rAvg += c.data[x];
+                            gAvg += c.data[x+1];
+                            bAvg += c.data[x+2];
+                            aAvg += c.data[x+3];
+                        }
+                        
+                    }
+                    rAvg /= (count);
+                    gAvg /= (count);
+                    bAvg /= (count);
+                    aAvg /= (count);
+
+                    outerFor:for (var iPix = i; iPix < i+pix; iPix++) {
+                        for (var jPix = j; jPix < j+pix; jPix++) {
+                            if (iPix > height) {
+                                break;
+                            } else if(jPix>width){
+                                break outerFor;
+                            }
+                            var x = iPix*4*width + 4*jPix;
+                            c.data[x] = rAvg
+                            c.data[x+1] = gAvg;
+                            c.data[x+2] = bAvg; 
+                            c.data[x+3] = aAvg;
+                        }
+                    }
+                }
+            }
+            ctx.putImageData(c,0,0);
+            return canvas.toDataURL();
+        }
+
+
+        function download(src) {
+            var $a = document.createElement('a');
+            $a.setAttribute("href", src);
+            $a.setAttribute("download", "");
+
+            var evObj = document.createEvent('MouseEvents');
+            evObj.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, false, false, true, false, 0, null);
+            $a.dispatchEvent(evObj);
+        };
+        
+    </script>  
+
+</body>
+</html>

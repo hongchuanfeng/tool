@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="RegexBuddy">
+    <meta name="renderer" content="webkit">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+    <link rel="canonical" href="https://tool.openai2025.com/">
+    <title>
+        在线正则表达式测试工具
+    </title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SQLH42B270"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-SQLH42B270');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7274710287377352"
+            crossorigin="anonymous"></script>
+    <link rel="canonical" href="https://tool.openai2025.com/">
+    <script src="lib/jquery-1.9.1.js"></script>
+    
+    <link rel="stylesheet" href="lib/codemirror/codemirror.css">
+    <script src="lib/codemirror/codemirror.js"></script>
+
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
+    <script src="lib/bootstrap/js/bootstrap.js"></script>
+    <script src="js/jch.Core.js"></script>
+    <script src="js/jch.jRegexTester.js"></script>
+    <script src="js/index.js"></script>
+    <link href="css.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container-fluid">
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="btn-toolbar alert alert-info" role="toolbar">
+                        <h1 class="title">
+                            Regular expression testing
+                        </h1>
+                        <div class="btn-group btn-group-sm" data-toggle="buttons" role="group">
+
+                            <label class="btn btn-default active">
+                                <input type="radio" name="workMode" id="workModeMatch" value="0" checked>search mode
+
+                            </label>
+                            <label class="btn btn-default">
+                                <input type="radio" name="workMode" id="workModeReplace" value="1">replace mode
+
+
+                            </label>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-success navbar-btn" id="btnRun" style="display:none">Run!</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="btn-toolbar alert alert-warning" role="toolbar">
+
+                        <label for=''>regular expression :</label>
+                        <div class="btn-group btn-group-xs" data-toggle="buttons" role="group">
+                            <a href='javascript:;' class="copy-link" id="copyLink" title="Copy the current regular expression and replace the string to the URL">
+                                #copy link
+                            </a>
+                            <label class="btn btn-default active" title="Select to match all matching items, otherwise only match the first item, parameter g">
+                                <input type="checkbox" name="RegExpOption" id="RegExpOptionGlobal" value="g" checked>global mode
+                            </label>
+                            <label class="btn btn-default" title="If selected, ignore case, parameter i">
+                                <input type="checkbox" name="RegExpOption" id="RegExpOptionIgnoreCase" value="i">ignore case
+                            </label>
+                            <label class="btn btn-default" title="Select to escape ^ and $as the beginning and end of the line, otherwise ^ and $as the beginning and end of all text">
+                                <input type="checkbox" name="RegExpOption" id="RegExpOptionMultiline" value="m">Multi line mode
+                            </label>
+                        </div>
+                        <textarea class="form-control" style="font-size:x-large" name="" id="tbReg" cols="30" rows="1" placeholder="regular expression" spellcheck="false"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="btn-toolbar alert alert-warning" role="toolbar">
+                        <label for=''>input string : </label>
+                        <div class="btn-group btn-group-xs" role="group">
+                            <label class="btn btn-default" title="Call decodeURI Component to decode the input string" id="btnDecodeURI">decodeURI</label>
+                            <label class="btn btn-default" title="Decode the input string as base64" id="btnDecodeBase64">Base64 decoding</label>
+                        </div>
+                        <textarea class="form-control" name="" id="tbInput" cols="30" rows="7" placeholder="input string" spellcheck="false"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="btn-toolbar alert alert-warning" role="toolbar">
+                        <label for="">replace content : </label>
+                        <div class="btn-group btn-group-xs" data-toggle="buttons" role="group">
+                            <label class="btn btn-default active" title="Default mode refers to replacing the matching results in the source string with new content">
+                                <input type="radio" name="replaceMode" id="replaceModeIncludeNoMatch" value="0" checked>Contains unmatched items
+                            </label>
+                            <label class="btn btn-default" title="Extraction mode, used to replace the matching content in the source string with new content, commonly used for data extraction">
+                                <input type="radio" name="replaceMode" id="replaceModeExcludeNoMatch" value="1">Excluding unmatched items
+                            </label>
+                        </div>
+                        <textarea class="form-control" name="" id="tbReplace" cols="30" rows="3" placeholder="replace content" spellcheck="false"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="btn-toolbar alert alert-warning" role="toolbar">
+                        <label for=''>Output result:</label>
+
+                        <div class="btn-group btn-group-xs" role="group">
+                            <label class="btn btn-default" title="Import the output results into the input content box" id="btnOutputToInput">⬆</label>
+                        </div>
+
+                        <div class="btn-group btn-group-xs" data-toggle="buttons" role="group">
+                            <label class="btn btn-default active" title="Window system line breaks, CRLF">
+                                <input type="radio" name="newLineChar" id="newLineCharCRLF" value="0" checked>\r\n
+                            </label>
+                            <label class="btn btn-default" title="Mac system line breaks, CR">
+                                <input type="radio" name="newLineChar" id="newLineCharCR" value="1">\r
+                            </label>
+                            <label class="btn btn-default" title="Linux system line breaks, LF">
+                                <input type="radio" name="newLineChar" id="newLineCharLF" value="2">\n
+                            </label>
+                        </div>
+                        <textarea class="form-control" name="" id="tbOutput" cols="30" rows="7" placeholder="Output result" spellcheck="false"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <center>(<a href="./index.html">Simplified Chinese</a> | <a href="./index-en.html">English</a>)</center>
+
+</body>
+
+</html>

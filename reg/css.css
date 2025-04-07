@@ -1,0 +1,38 @@
+﻿* {
+    font-family: Monaco, Andale Mono;
+}
+
+.alert {
+    padding: 5px;
+    margin-bottom: 0px;
+    margin-left: 0;
+}
+
+.btn-toolbar .btn-group, .btn-toolbar .input-group {
+    float: right;
+}
+
+textarea {
+    word-break: break-all;
+}
+
+.title {
+    display: inline-block;
+    margin: 0;
+    height: 30px;
+    line-height: 30px;
+    width: 1200px;
+    text-align: center;
+}
+
+.copy-link {
+    float: left;
+    font-size: 12px;
+    margin-right: 10px;
+    margin-top: 2px;
+}
+.link-a {
+    margin-left: 6px;
+    text-decoration: underline;
+    color: #0087f5;
+}

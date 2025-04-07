@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>在线图片压缩工具</title>
+    <link rel="icon" href="../favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SQLH42B270"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-SQLH42B270');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7274710287377352"
+            crossorigin="anonymous"></script>
+
+    <link rel="canonical" href="https://tool.openai2025.com/">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="css.css">
+  </head>
+  <body>
+
+
+  <div class="row" style="margin-right: 0px">
+    <div class="col-xs-12 col-sm-12">
+      <h1 class="h-left">在线图片压缩</h1>
+    </div>
+
+  </div>
+
+  <div class="container">
+
+      <div class="settings">
+        <label>
+          缩放比例:
+          <input
+            type="range"
+            id="scaleFactor"
+            min="10"
+            max="100"
+            value="70"
+            step="5"
+          />
+          <span id="scaleValue">70%</span>
+          <span class="recommended-tag">推荐: 70%</span>
+        </label>
+        <label>
+          压缩质量:
+          <input
+            type="range"
+            id="quality"
+            min="10"
+            max="100"
+            value="70"
+            step="5"
+          />
+          <span id="qualityValue">70%</span>
+          <span class="recommended-tag">推荐: 70%</span>
+        </label>
+        <label>
+          输出格式:
+          <select id="format">
+            <option value="image/jpeg">JPEG</option>
+            <option value="image/png">PNG</option>
+            <option value="image/webp">WebP</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="upload-area" id="uploadArea">
+        <input
+          type="file"
+          id="upload"
+          accept="image/jpeg,image/png,image/webp"
+        />
+        <div class="upload-content">
+          <i>📁</i>
+          <div class="upload-text">拖拽图片到这里 或 点击上传</div>
+          <div class="upload-hint">支持 JPG、PNG、WebP 格式，最大 10MB</div>
+          <div class="error-message" id="errorMessage"></div>
+        </div>
+      </div>
+
+      <button onclick="compressImage()">开始压缩</button>
+
+      <div class="progress-bar">
+        <div class="progress" id="progress"></div>
+      </div>
+
+      <div class="file-info" id="fileInfo">
+        <div>原始大小: <span id="originalSize">0 KB</span></div>
+        <div>压缩后大小: <span id="compressedSize">0 KB</span></div>
+        <div>压缩率: <span id="compressionRatio">0%</span></div>
+      </div>
+
+      <canvas id="canvas" style="display: none"></canvas>
+      <a
+        id="download"
+        style="display: none; margin-top: 10px"
+        download="compressed-image.jpg"
+        >下载压缩后的图片</a
+      >
+      <div id="preview"></div>
+    </div>
+    <center>(<a href="./index.html">简体中文</a> | <a href="./index-en.html">English</a>)</center>
+    <script>
+      // 统一定义 DOM 元素
+      const uploadArea = document.getElementById("uploadArea");
+      const fileInput = document.getElementById("upload");
+      const errorMessage = document.getElementById("errorMessage");
+      const progressBar = document.querySelector(".progress-bar");
+      const progress = document.getElementById("progress");
+      const fileInfo = document.getElementById("fileInfo");
+      const scaleFactorInput = document.getElementById("scaleFactor");
+      const qualityInput = document.getElementById("quality");
+      const scaleValue = document.getElementById("scaleValue");
+      const qualityValue = document.getElementById("qualityValue");
+      const canvas = document.getElementById("canvas");
+      const preview = document.getElementById("preview");
+      const downloadLink = document.getElementById("download");
+
+      // 设置滑块值显示
+      scaleFactorInput.addEventListener("input", function (e) {
+        scaleValue.textContent = e.target.value + "%";
+      });
+
+      qualityInput.addEventListener("input", function (e) {
+        qualityValue.textContent = e.target.value + "%";
+      });
+
+      // 文件大小格式化
+      function formatFileSize(bytes) {
+        if (bytes === 0) return "0 Bytes";
+        const k = 1024;
+        const sizes = ["Bytes", "KB", "MB", "GB"];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+      }
+
+      // 显示错误信息
+      function showError(message) {
+        errorMessage.textContent = message;
+        errorMessage.style.display = "block";
+        setTimeout(() => {
+          errorMessage.style.display = "none";
+        }, 3000);
+      }
+
+      // 清理函数
+      function cleanup() {
+        const ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        canvas.width = canvas.height = 0;
+        progressBar.style.display = "none";
+        progress.style.width = "0%";
+      }
+
+      // 文件名清理
+      function sanitizeFileName(name) {
+        return name.replace(/[^a-zA-Z0-9.-]/g, "_").replace(/_{2,}/g, "_");
+      }
+
+      // 文件验证
+      function validateFile(file) {
+        const validTypes = ["image/jpeg", "image/png", "image/webp"];
+        const maxSize = 10 * 1024 * 1024;
+        const maxDimension = 4096;
+
+        return new Promise((resolve, reject) => {
+          if (!validTypes.includes(file.type)) {
+            reject("请上传 JPG、PNG 或 WebP 格式的图片");
+            return;
+          }
+
+          if (file.size > maxSize) {
+            reject("文件大小不能超过 10MB");
+            return;
+          }
+
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const arr = new Uint8Array(e.target.result).subarray(0, 4);
+            let header = "";
+            for (let i = 0; i < arr.length; i++) {
+              header += arr[i].toString(16);
+            }
+
+            const validHeaders = {
+              ffd8ffe0: true,
+              "89504e47": true,
+              52494646: true,
+            };
+
+            if (!validHeaders[header]) {
+              reject("文件格式不正确");
+              return;
+            }
+
+            const img = new Image();
+            img.onload = function () {
+              URL.revokeObjectURL(img.src);
+              if (this.width > maxDimension || this.height > maxDimension) {
+                reject(`图片尺寸不能超过 ${maxDimension}x${maxDimension}`);
+                return;
+              }
+              resolve(true);
+            };
+            img.onerror = function () {
+              URL.revokeObjectURL(img.src);
+              reject("图片加载失败");
+            };
+            img.src = URL.createObjectURL(file);
+          };
+          reader.onerror = () => reject("文件读取失败");
+          reader.readAsArrayBuffer(file.slice(0, 4));
+        });
+      }
+
+      // 图片压缩主函数
+      async function compressImage() {
+        try {
+          if (fileInput.files.length === 0) {
+            throw new Error("请选择图片文件");
+          }
+
+          const file = fileInput.files[0];
+          await validateFile(file);
+
+          document.getElementById("originalSize").textContent = formatFileSize(
+            file.size
+          );
+          fileInfo.style.display = "block";
+          progressBar.style.display = "block";
+
+          const loadImage = () =>
+            new Promise((resolve, reject) => {
+              const reader = new FileReader();
+              reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => resolve(img);
+                img.onerror = () => reject(new Error("图片加载失败"));
+                img.src = e.target.result;
+              };
+              reader.onerror = () => reject(new Error("文件读取失败"));
+              reader.readAsDataURL(file);
+              setTimeout(() => reject(new Error("加载超时")), 30000);
+            });
+
+          let progressValue = 0;
+          const progressInterval = setInterval(() => {
+            progressValue = Math.min(progressValue + 5, 90);
+            progress.style.width = progressValue + "%";
+          }, 100);
+
+          try {
+            const img = await loadImage();
+            const ctx = canvas.getContext("2d");
+
+            const scaleFactor = scaleFactorInput.value / 100;
+            const quality = qualityInput.value / 100;
+            const format = document.getElementById("format").value;
+
+            const maxDimension = 4096;
+            let width = img.width * scaleFactor;
+            let height = img.height * scaleFactor;
+
+            if (width > maxDimension || height > maxDimension) {
+              const ratio = Math.min(
+                maxDimension / width,
+                maxDimension / height
+              );
+              width *= ratio;
+              height *= ratio;
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+
+            requestAnimationFrame(() => {
+              ctx.drawImage(img, 0, 0, width, height);
+              const compressedDataUrl = canvas.toDataURL(format, quality);
+
+              const compressedSize = Math.round(
+                ((compressedDataUrl.length - 22) * 3) / 4
+              );
+              document.getElementById("compressedSize").textContent =
+                formatFileSize(compressedSize);
+              const ratio = Math.round((1 - compressedSize / file.size) * 100);
+              document.getElementById("compressionRatio").textContent =
+                ratio + "%";
+
+              downloadLink.href = compressedDataUrl;
+              const extension = format.split("/")[1];
+              const fileName = `compressed-${sanitizeFileName(
+                file.name.split(".")[0]
+              )}.${extension}`;
+              downloadLink.download = fileName;
+              downloadLink.style.display = "block";
+              downloadLink.textContent = "下载压缩后的图片";
+
+              preview.innerHTML = `<img src="${compressedDataUrl}" alt="Compressed Image">`;
+
+              clearInterval(progressInterval);
+              progress.style.width = "100%";
+              setTimeout(() => {
+                progressBar.style.display = "none";
+                progress.style.width = "0%";
+              }, 1000);
+            });
+          } finally {
+            clearInterval(progressInterval);
+          }
+        } catch (error) {
+          cleanup();
+          showError(error.message || "压缩过程中出现错误");
+        }
+      }
+
+      // 拖拽相关事件处理
+      function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      function highlight(e) {
+        uploadArea.classList.add("drag-over");
+      }
+
+      function unhighlight(e) {
+        uploadArea.classList.remove("drag-over");
+      }
+
+      // 绑定拖拽事件
+      ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
+        uploadArea.addEventListener(eventName, preventDefaults, false);
+        document.body.addEventListener(eventName, preventDefaults, false);
+      });
+
+      ["dragenter", "dragover"].forEach((eventName) => {
+        uploadArea.addEventListener(eventName, highlight, false);
+      });
+
+      ["dragleave", "drop"].forEach((eventName) => {
+        uploadArea.addEventListener(eventName, unhighlight, false);
+      });
+
+      // 处理文件拖放
+      uploadArea.addEventListener("drop", async (e) => {
+        const file = e.dataTransfer.files[0];
+        try {
+          await validateFile(file);
+          const dataTransfer = new DataTransfer();
+          dataTransfer.items.add(file);
+          fileInput.files = dataTransfer.files;
+          compressImage();
+        } catch (error) {
+          showError(error);
+        }
+      });
+
+      // 处理文件选择
+      fileInput.addEventListener("change", async function (e) {
+        const file = e.target.files[0];
+        try {
+          await validateFile(file);
+          compressImage();
+        } catch (error) {
+          showError(error);
+          this.value = "";
+        }
+      });
+
+      // 网络状态监控
+      window.addEventListener("online", () => {
+        document.querySelector(".upload-hint").style.color = "#888";
+        document.querySelector(".upload-hint").textContent =
+          "支持 JPG、PNG、WebP 格式，最大 10MB";
+      });
+
+      window.addEventListener("offline", () => {
+        document.querySelector(".upload-hint").style.color = "#ff4444";
+        document.querySelector(".upload-hint").textContent = "网络连接已断开";
+      });
+    </script>
+  </body>
+</html>

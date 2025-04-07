@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Base64编码/解码</title>
+  <link rel="canonical" href="https://tool.openai2025.com/">
+  <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SQLH42B270"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-SQLH42B270');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7274710287377352"
+          crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: white;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #4CAF50;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 10px;
+      border: 2px solid #4CAF50;
+      border-radius: 4px;
+      resize: vertical;
+      font-size: 14px;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 15px 0;
+    }
+
+    button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    #encodeBtn {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    #decodeBtn {
+      background-color: #FF9800;
+      color: white;
+    }
+
+    #clearBtn {
+      background-color: #f44336;
+      color: white;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+<h1>Base64编码/解码</h1>
+<div class="container">
+  <textarea id="encodeInput" placeholder="输入需要编码的文本内容..."></textarea>
+
+  <div class="button-group">
+    <button id="encodeBtn" onclick="encodeText()">Base64编码</button>
+    <button id="decodeBtn" onclick="decodeText()">Base64解码</button>
+    <button id="clearBtn" onclick="clearAll()">清空</button>
+  </div>
+
+  <textarea id="decodeInput" placeholder="输入需要解码的Base64内容..."></textarea>
+</div>
+
+<script>
+  function encodeText() {
+    const input = document.getElementById('encodeInput').value;
+    const encoded = btoa(unescape(encodeURIComponent(input)));
+    document.getElementById('decodeInput').value = encoded;
+  }
+
+  function decodeText() {
+    try {
+      const input = document.getElementById('decodeInput').value;
+      const decoded = decodeURIComponent(escape(atob(input)));
+      document.getElementById('encodeInput').value = decoded;
+    } catch (error) {
+      alert('解码错误：请输入有效的Base64内容');
+    }
+  }
+
+  function clearAll() {
+    document.getElementById('encodeInput').value = '';
+    document.getElementById('decodeInput').value = '';
+  }
+</script>
+</body>
+</html>
